@@ -1,0 +1,44 @@
+<section class="hero">
+  <div class="hero-content">
+    <p class="eyebrow">Nova colecao online</p>
+    <h1>Produtos selecionados para comprar sem complicacao.</h1>
+    <p>
+      Explore itens de moda, joias e tecnologia com fotos, avaliacoes e precos vindos direto
+      da Fake Store API.
+    </p>
+  </div>
+</section>
+
+<section class="page-section">
+  <div class="section-heading">
+    <div>
+      <p class="eyebrow">Catalogo</p>
+      <h2>Produtos em destaque</h2>
+    </div>
+    <span class="soft-badge">Frete simulado gratis</span>
+  </div>
+
+  <ng-container *ngIf="products$ | async as products; else loading">
+    <div class="product-grid">
+      <article class="product-card" *ngFor="let product of products">
+        <a class="product-link" [routerLink]="['/produto', product.id]">
+          <figure>
+            <img [src]="product.image" [alt]="product.title" />
+          </figure>
+          <div class="product-info">
+            <span class="category">{{ product.category | titlecase }}</span>
+            <h3>{{ product.title }}</h3>
+            <div class="product-meta">
+              <strong>{{ product.price | currency: 'USD' }}</strong>
+              <span>★ {{ product.rating.rate }} ({{ product.rating.count }})</span>
+            </div>
+          </div>
+        </a>
+      </article>
+    </div>
+  </ng-container>
+
+  <ng-template #loading>
+    <div class="state-box">Carregando produtos...</div>
+  </ng-template>
+</section>

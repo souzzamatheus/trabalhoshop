@@ -1,0 +1,41 @@
+<section class="page-section">
+  <a class="back-link" routerLink="/">Voltar aos produtos</a>
+
+  <ng-container *ngIf="product$ | async as product; else loading">
+    <article class="detail-layout">
+      <figure class="detail-image">
+        <img [src]="product.image" [alt]="product.title" />
+      </figure>
+
+      <div class="detail-content">
+        <span class="category">{{ product.category | titlecase }}</span>
+        <h1>{{ product.title }}</h1>
+        <div class="rating-row">
+          <span>★ {{ product.rating.rate }} de 5</span>
+          <span>{{ product.rating.count }} avaliacoes</span>
+        </div>
+        <p class="detail-price">{{ product.price | currency: 'USD' }}</p>
+        <p class="description">{{ product.description }}</p>
+
+        <div class="info-list">
+          <div>
+            <span>ID do produto</span>
+            <strong>#{{ product.id }}</strong>
+          </div>
+          <div>
+            <span>Categoria</span>
+            <strong>{{ product.category | titlecase }}</strong>
+          </div>
+          <div>
+            <span>Estoque</span>
+            <strong>Disponivel</strong>
+          </div>
+        </div>
+      </div>
+    </article>
+  </ng-container>
+
+  <ng-template #loading>
+    <div class="state-box">Carregando detalhes do produto...</div>
+  </ng-template>
+</section>

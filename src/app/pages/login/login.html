@@ -1,0 +1,35 @@
+<section class="auth-page">
+  <div class="auth-panel">
+    <p class="eyebrow">Acesso do cliente</p>
+    <h1>Entre na sua conta</h1>
+    <p class="muted">
+      Use o usuario de teste da Fake Store API ou informe outra credencial valida.
+    </p>
+
+    <form (ngSubmit)="submit()" #loginForm="ngForm">
+      <label>
+        Usuario
+        <input name="username" type="text" [(ngModel)]="username" required autocomplete="username" />
+      </label>
+
+      <label>
+        Senha
+        <input
+          name="password"
+          type="password"
+          [(ngModel)]="password"
+          required
+          autocomplete="current-password"
+        />
+      </label>
+
+      <p class="error-message" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+      <button class="primary-button" type="submit" [disabled]="loginForm.invalid || loading">
+        {{ loading ? 'Entrando...' : 'Entrar' }}
+      </button>
+    </form>
+
+    <a routerLink="/">Continuar vendo produtos</a>
+  </div>
+</section>
